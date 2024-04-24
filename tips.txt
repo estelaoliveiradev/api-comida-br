@@ -1,0 +1,4 @@
+3. Dicas adicionais:
+
+Organize seu código para separar preocupações. A lógica de negócios que interage com modelos normalmente deve residir em exibições ou comandos de gerenciamento.
+Se você não tiver certeza de onde acessar os modelos, consulte a documentação do Django e as práticas recomendadas sobre o uso de modelos e interações de banco de dados.

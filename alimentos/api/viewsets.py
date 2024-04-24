@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from alimentos.api.serializers import AlimentoSerializer, CategoriaSerializer, TipoPratoSerializer
-from alimentos.api.serializers import ReceitaSerializer, RefeicaoSerializer, CardapioSerializer
-from alimentos.models import Alimento, Categoria, TipoPrato, Receita, Refeicao, Cardapio
+from alimentos.api.serializers import CongelamentoSerializer, RefeicaoSerializer, CardapioSerializer
+from alimentos.models import Alimento, Categoria, TipoPrato, Congelamento, Refeicao, Cardapio
 
 
 class AlimentoViewSet(viewsets.ModelViewSet):
@@ -16,9 +16,9 @@ class TipoPratoViewSet(viewsets.ModelViewSet):
     queryset = TipoPrato.objects.all()
     serializer_class = TipoPratoSerializer
 
-class ReceitaViewSet(viewsets.ModelViewSet):
-    queryset = Receita.objects.all()
-    serializer_class = ReceitaSerializer
+class CongelamentoViewSet(viewsets.ModelViewSet):
+    queryset = Congelamento.objects.all()
+    serializer_class = CongelamentoSerializer
 
 class RefeicaoViewSet(viewsets.ModelViewSet):
     queryset = Refeicao.objects.all()

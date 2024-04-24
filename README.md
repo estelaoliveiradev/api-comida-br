@@ -11,6 +11,7 @@ Ative a variável de ambiente
 
 No bash:
 ``` source ./venv/Scripts/activate ```
+
 No powershell
 ``` source .\venv\Scripts\activate ```
 

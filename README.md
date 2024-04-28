@@ -19,3 +19,8 @@ No powershell:
 Após tudo isso, rodar o requirements 
 
 ``` pip install -r requirements.txt ```
+
+Depois rode o django
+
+
+``` python manage.py runserver ```

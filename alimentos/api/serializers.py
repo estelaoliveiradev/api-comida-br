@@ -1,17 +1,16 @@
 from rest_framework import serializers
 from alimentos import models
 
-
-class AlimentoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Alimento
-        fields = ('codigo', 'nome_alimento', 'kcal', 'porcao', 'data_cadastro')
-
 class CategoriaSerializer(serializers.ModelSerializer):
-    nome_alimento = AlimentoSerializer(read_only=True, many=True)  # Nested serializer for related alimentos
     class Meta:
         model = models.Categoria
-        fields = ('codigo', 'nome_categoria', 'nome_alimento')
+        fields = ('codigo', 'nome_categoria')
+
+class AlimentoSerializer(serializers.ModelSerializer):
+    nome_categoria_id = CategoriaSerializer(read_only=True, many=True)
+    class Meta:
+        model = models.Alimento
+        fields = ('codigo', 'nome_alimento', 'nome_categoria', 'nome_categoria_id', 'kcal', 'porcao', 'data_cadastro', 'imagem')
 
 class TipoPratoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,11 +18,10 @@ class TipoPratoSerializer(serializers.ModelSerializer):
         fields = ('codigo','nome_prato')
 
 class CongelamentoSerializer(serializers.ModelSerializer):
-    tipo_prato = TipoPratoSerializer(read_only=True)
-    nome_alimento = AlimentoSerializer(many=True, read_only=True)
+    tipo_prato_id = TipoPratoSerializer(read_only=True)
     class Meta:
         model = models.Congelamento
-        fields = ('codigo', 'nome_congelamento', 'descricao', 'tempo_preparo', 'dificuldade', 'rendimento', 'imagem', 'tipo_prato', 'nome_alimento')
+        fields = ('codigo', 'nome_congelamento', 'descricao', 'modo_preparo','tempo_preparo', 'dificuldade', 'rendimento', 'imagem', 'tipo_prato_id')
 
 class RefeicaoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,9 +29,9 @@ class RefeicaoSerializer(serializers.ModelSerializer):
         fields = ('codigo','nome_refeicao')
 
 class CardapioSerializer(serializers.ModelSerializer):
-    nome_refeicao = RefeicaoSerializer(read_only=True)
-    nome_alimento = AlimentoSerializer(read_only=True)
+    nome_refeicao_id = RefeicaoSerializer(read_only=True)
+    congelamento_id = CongelamentoSerializer(read_only=True)
  
     class Meta:
         model = models.Cardapio
-        fields = ('codigo','dia_semana', 'nome_refeicao', 'nome_alimento', 'nome_refeicao')
+        fields = ('codigo','dia_semana', 'nome_refeicao', 'nome_refeicao_id', 'congelamento_id')

@@ -5,9 +5,11 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 
+
 class CongelamentoViewSet(viewsets.ModelViewSet):
     queryset = Congelamento.objects.all()
     serializer_class = CongelamentoSerializer
+
     def create(self, request):
         """
         Cria uma nova receita (congelamento).
@@ -22,6 +24,7 @@ class CongelamentoViewSet(viewsets.ModelViewSet):
         Obtém uma receita específica (congelamento) pelo ID.
         """
         congelamento = get_object_or_404(self.queryset, pk=pk)
+
         serializer = self.serializer_class(congelamento)
         return Response(serializer.data)
 
@@ -30,6 +33,7 @@ class CongelamentoViewSet(viewsets.ModelViewSet):
         Atualiza uma receita (congelamento) existente.
         """
         congelamento = get_object_or_404(self.queryset, pk=pk)
+        # Aqui, passe a instância de Congelamento
         serializer = self.serializer_class(congelamento, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
